@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+.Renviron
+*.Rcheck/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Large outputs (do NOT commit)
+*.h5ad
+*.h5
+*.rds
+*.RData
+*.pickle
+*.pkl
+*.npz
+results/
+data/processed/
+data/external/
+
+# Build / temp
+build/
+dist/
+tmp/
+*.log
+# Credentials — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*
+*secret*
+.netrc
+.git-credentials

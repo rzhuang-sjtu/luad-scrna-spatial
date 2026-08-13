@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the accompanying paper."
+title: "Analysis code for: Deep-learning integration of single-cell and spatial transcriptomics in lung adenocarcinoma"
+authors:
+  - family-names: "Huang"
+    given-names: "Ruizhe"
+  - family-names: "Liu"
+    given-names: "Zhiyi"
+  - family-names: "Zhao"
+    given-names: "Yawei"
+  - family-names: "Kang"
+    given-names: "Ting"
+  - family-names: "Li"
+    given-names: "Xiangyuan"
+  - family-names: "Lu"
+    given-names: "Shumin"
+  - family-names: "Chen"
+    given-names: "Siyu"
+    email: "siyu.chen@shsmu.edu.cn"
+abstract: >
+  Analysis and plotting code for an integrated single-cell RNA-seq, Visium
+  spatial transcriptomics and Geneformer in-silico perturbation study of lung
+  adenocarcinoma: per-patient consensus NMF meta-programme discovery, TCGA-LUAD
+  survival validation, tumour-associated neutrophil heterogeneity, cell-cell
+  communication, spatial deconvolution, and a multi-endpoint candidate
+  nomination cascade. Includes all analyses added during revision.
+keywords:
+  - lung adenocarcinoma
+  - single-cell RNA-seq
+  - spatial transcriptomics
+  - in-silico perturbation
+license: MIT
+version: "1.1.0"
+date-released: "2026-08-06"
+doi: "10.5281/zenodo.XXXXXXX"

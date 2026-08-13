@@ -1,0 +1,6 @@
+suppressPackageStartupMessages(library(CellChat))
+cc <- readRDS("${PROJECT_ROOT}/data/processed/cellchat_rds/cellchat_Tumor.rds")
+cat("levels:\n")
+lv <- levels(cc@idents)
+print(lv)
+cat("\nlength:", length(lv), "\n")

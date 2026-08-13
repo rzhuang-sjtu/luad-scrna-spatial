@@ -1,0 +1,6 @@
+name: geneformer
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+prefix: ${HOME}/miniforge3/envs/geneformer

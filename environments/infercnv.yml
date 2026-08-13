@@ -1,0 +1,16 @@
+# Environment used for the inferCNV cross-validation added during revision
+# (independent CNV cross-check). inferCNV was run on a rented 32-core Linux node;
+# that machine has since been released, so this file is a specification rather
+# than an export. The binary conda packages below are what was installed.
+name: icnv
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.5.3
+  - bioconductor-infercnv=1.26.0
+  - r-matrixstats            # G2_run_infercnv.R loads it directly
+  - r-rjags            # required for the i6 HMM; the source install of
+                       # infercnv failed to build here, the binary works
+  - r-matrix
+  - r-optparse
