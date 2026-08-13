@@ -14,3 +14,7 @@ a cleaned `.h5ad` that feeds into `data_prep/atlas_build/02_merge_datasets.py`:
 6. **Coarse clustering + residual low-quality cluster removal**.
 
 Cleaned AnnData proceeds to integrated downstream analysis.
+
+## Renaming between QC and atlas build
+
+This stage writes `<GSE>_cleaned.h5ad`. The next stage, `data_prep/atlas_build/01_inspect_metadata.py`, reads `<GSE>_clean.h5ad` from `${WORK_ROOT}/数据清洗/`. Copy and rename by hand between the two. Do not rename the directory: the Chinese name is a literal in downstream tables.

@@ -1,5 +1,5 @@
 # Supplementary Figure 1: QC, Batch Correction, Cell Type Validation
-# npj Precision Oncology 2026 HCC Fig.S1 panel
+# Panel layout adapted from Fig. S1 of the HCC study cited in the manuscript
 
 required_cran <- c("ggplot2", "dplyr", "data.table", "R.utils",
                    "patchwork", "RColorBrewer", "scales",

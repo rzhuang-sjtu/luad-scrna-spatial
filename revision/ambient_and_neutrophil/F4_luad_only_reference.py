@@ -70,6 +70,19 @@ sub.obs["new_label"] = pred
 sub.obs["new_uncertainty"] = 1 - prob.max(axis=1).values
 log("Training finished")
 
+# The reference carries Salcher's own label names (TAN-*/NAN-*/Neutrophils) while
+# the LUAD object carries the functional names (Neu_*). Comparing them directly
+# gives a kappa over two disjoint label sets and a retention rate of zero for
+# every state, so the prediction is mapped into the functional namespace first.
+RENAME = {
+    "TAN-1": "Neu_Inflammatory",   "TAN-2": "Neu_IFN_response",
+    "TAN-3": "Neu_Angiogenic",     "TAN-4": "Neu_Metastatic",
+    "NAN-1": "Neu_ECM_remodeling", "NAN-2": "Neu_OSM_priming",
+    "NAN-3": "Neu_OSM_low",        "Neutrophils": "Neu_unclassified",
+}
+sub.obs["new_label"] = sub.obs["new_label"].astype(str).map(
+    lambda x: RENAME.get(x, x))
+
 q = sub.obs.loc[~is_ref].copy()
 q["own_prev"] = own_lab.reindex(q.index).values
 res = q[["new_label", "own_prev", "new_uncertainty"]].dropna()

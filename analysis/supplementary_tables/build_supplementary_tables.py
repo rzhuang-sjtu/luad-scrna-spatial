@@ -1,6 +1,6 @@
 """
 Build the 6 Supplementary Tables for the LUAD project, mirroring the
-format used by the npj Precision Oncology 2026 HCC reference paper.
+format used by the HCC study cited in the manuscript.
 
 Output: ${WORK_ROOT}/Supplementary_Tables/Supplementary_Table_S{1..6}.xlsx
 

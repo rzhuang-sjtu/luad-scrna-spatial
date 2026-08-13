@@ -9,8 +9,11 @@ reads is publicly accessible; accessions are listed below and cited individually
 in the paper. Raw records for the validation spatial cohort (JGAS000613,
 JGAS000677) are controlled-access: the workflow does not read them and they are
 not redistributed here — it reads the openly available processed Visium data.
-Derived data supporting the figures are deposited with this code on Zenodo
-(DOI in `CITATION.cff`).
+The Zenodo deposit <https://doi.org/10.5281/zenodo.21912264> holds two things:
+an archive of this repository, and a `derived_tables/` bundle with the tables
+that the plotting scripts read but this repository does not regenerate (file
+list in `config/data_provenance.md`). The same concept DOI is used for both
+because they are versioned together.
 
 ## Layout
 
@@ -99,7 +102,7 @@ roots.
 | GSE189357 | atlas merge |
 | GSE253013 | atlas merge |
 | GSE149655, GSE223503, GSE308103 | passed QC but not merged into the atlas; the inclusion decision is in `data_prep/qc/dataset_inclusion_analysis.py` |
-| Salcher et al. NSCLC atlas | scANVI reference for neutrophil label transfer |
+| Salcher et al. 2022 NSCLC atlas — CELLxGENE <https://cellxgene.cziscience.com/collections/edb893ee-4066-4128-9aec-5eb2b03f8287> or Zenodo <https://doi.org/10.5281/zenodo.6411867>; place the neutrophil reference at `${DATA_ROOT}/High-resolution/neutrophil_final.h5ad`, renaming if needed | scANVI reference for neutrophil label transfer |
 
 ### Spatial transcriptomics
 
@@ -136,8 +139,12 @@ roots.
 
 ## Citation
 
-See `CITATION.cff`. Please cite the paper and, if you use the code directly,
-the Zenodo record.
+See `CITATION.cff`. Paper: *Cancer Immunology, Immunotherapy*. Code archive: https://doi.org/10.5281/zenodo.21912264
+
+## Contact
+
+Code: Ruizhe Huang, <rhuang6@outlook.com>  
+Correspondence: Siyu Chen, <siyu.chen@shsmu.edu.cn>
 
 ## Network activity
 
@@ -152,9 +159,11 @@ matrix, sample table or file ever leaves the machine.
 | Enrichment testing | Enrichr | a list of gene symbols | enrichment results |
 | Gene ID mapping | MyGene | a list of Ensembl IDs | matching symbols |
 
-MSigDB asks you to accept its licence before downloading; fetch the Hallmark
-`.gmt` yourself and place it under `${DATA_ROOT}` if you would rather not have a
-script do it.
+MSigDB asks you to accept its licence before downloading. No script fetches the
+Hallmark sets for you: download them yourself (Enrichr library
+`MSigDB_Hallmark_2020`, or MSigDB `h.all.*.symbols.gmt` renamed to match) and
+place the file at `${PROJECT_ROOT}/data/gmt/MSigDB_Hallmark_2020.gmt` — every
+consumer reads that exact path and filename.
 
 ## License
 

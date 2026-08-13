@@ -23,7 +23,8 @@ LBL = Path.home() / "luad/results/step10c_obs_labels.csv.gz"
 RES = Path.home() / "luad/results"
 FIG = Path("${WORK_ROOT}/luad_figures/fig4")
 
-# ---- Panel F: anti-tumor / pro-immune gene panel (HCC reference) ----
+# ---- Panel F: anti-tumor / pro-immune gene panel ----
+# Gene list taken from the HCC study cited in the manuscript.
 ANTI_TUMOR = [
     # MHC-II antigen presentation
     "HLA-DQA1", "HLA-DQB1", "HLA-DQB2", "HLA-DPB1", "HLA-DRA", "HLA-DMA",

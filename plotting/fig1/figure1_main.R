@@ -1,5 +1,5 @@
 # Figure 1: LUAD
-# npj Precision Oncology 2026 HCC Fig.1
+# Panel layout adapted from Fig. 1 of the HCC study cited in the manuscript
 # Arial | : |
 
 required_cran <- c("ggplot2", "dplyr", "tidyr", "data.table", "R.utils",

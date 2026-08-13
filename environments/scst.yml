@@ -3,11 +3,22 @@ channels:
   - conda-forge
 dependencies:
   - python=3.11
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - statsmodels
+  - h5py
+  - joblib
+  - networkx
+  - pillow
+  - openpyxl
   - scanpy
   - squidpy
   - anndata
   - leidenalg
   - scikit-learn
+  - umap-learn
   - matplotlib
   - seaborn
   - jupyterlab
@@ -15,4 +26,28 @@ dependencies:
   - louvain
   - numba
   - pytables
-prefix: ${HOME}/miniforge3/envs/scst
+  - pip:
+      - scvi-tools
+      - decoupler
+      - liana
+      - cell2location
+      - commot
+      - celltypist
+      - cnmf
+      - lifelines
+      - gseapy
+      - scrublet
+      - harmonypy
+      - GEOparse
+      - pypdf
+      - matplotlib-venn
+      - elpigraph-python
+      - scFates
+      - phate
+      - mygene
+# GPU packages are optional and not required to create the environment:
+#   rapids-singlecell, cupy, cuml  (see INSTALL.md for the hardware table)
+# torch arrives as a scvi-tools dependency; pin it yourself only if your CUDA
+# version needs a specific build.
+# scst-pip-freeze.txt is a provenance snapshot, not an installable file: it
+# contains local conda-build paths and will fail with pip install -r.

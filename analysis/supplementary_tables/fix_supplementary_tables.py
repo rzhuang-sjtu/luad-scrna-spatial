@@ -620,7 +620,7 @@ with pd.ExcelWriter(OUT / "Supplementary_Table_S11_TF_LR_COMMOT.xlsx") as xw:
     if tf_top is not None:
         write_titled(xw, "Top state-specific TFs",
             "Table S11a. Top-15 state-specific transcription factors per MP (Fig 3A).",
-            "SCENIC AUCell z-scored across MPs; top-15 = highest |z| per MP.",
+            "decoupler univariate linear model against the CollecTRI prior, z-scored across MPs; top-15 = highest |z| per MP.",
             tf_top)
     if tf_z is not None:
         write_titled(xw, "TF activity z-score",
@@ -629,14 +629,14 @@ with pd.ExcelWriter(OUT / "Supplementary_Table_S11_TF_LR_COMMOT.xlsx") as xw:
             tf_z)
     if gs is not None:
         write_titled(xw, "GeneSwitches results",
-            "Table S11c. GeneSwitches outcome - switch genes along Monocle3 pseudotime (Fig 3C).",
+            "Table S11c. GeneSwitches outcome - switch genes along diffusion pseudotime (sc.tl.dpt) (Fig 3C).",
             ("switch_pseudotime_rank = order of switch event along pseudotime; "
-             "r2 / pval = logistic-regression fit; direction = up/down."),
+             "mcfadden_R2 / nagelkerke_R2 = logistic-regression fit; direction = up/down."),
             gs)
     if gs_top is not None:
         write_titled(xw, "GeneSwitches top",
             "Table S11d. Top GeneSwitches outputs displayed in Fig 3C.",
-            "Filtered to high-confidence binary switches with r2 > 0.3.",
+            "Filtered to switches with Nagelkerke R-squared >= 0.05.",
             gs_top)
     if liana is not None:
         write_titled(xw, "LIANA LR pairs",

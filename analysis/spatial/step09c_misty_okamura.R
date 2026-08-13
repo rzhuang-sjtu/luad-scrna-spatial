@@ -11,6 +11,8 @@ dir.create(DATA_DIR, recursive = TRUE, showWarnings = FALSE)
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 samples <- gsub("_intra.csv$", "", list.files(DATA_DIR, pattern = "_intra.csv$"))
+if (length(samples) == 0L) stop("No *_intra.csv in ", DATA_DIR,
+  ". Run data_prep/spatial/step09d_export_for_misty.py first — despite the number, it produces the input this script consumes.")
 cat("[info] sections:", length(samples), ":", paste(samples, collapse=" "), "\n")
 
 n_workers <- min(length(samples), parallel::detectCores() - 2L)

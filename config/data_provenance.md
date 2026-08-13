@@ -1,8 +1,10 @@
 # Where each input comes from
 
-Two kinds of file are read by the scripts but not produced by them. Both are
-listed here so that a reader who follows the pipeline does not stop at a missing
-file and wonder whether a script is absent.
+Two kinds of file are read by the scripts but not produced by them. The tables
+below list the ones a reader will hit, so that following the pipeline does not
+stop at a missing file and leave you wondering whether a script is absent. If you
+find an input that is read but not listed here, it is an omission — please open
+an issue.
 
 ## External data you download yourself
 
@@ -17,9 +19,18 @@ them individually.
 | `${DATA_ROOT}/TCGA_LUAD_analysis/TCGA_LUAD_TPM_matrix.csv`, `TCGA_LUAD_clinical.csv` | TCGA-LUAD expression and clinical | UCSC Xena, TCGA-LUAD open-access layer |
 | `${WORK_ROOT}/Gistic2_CopyNumber_Gistic2_all_data_by_genes.gz`, `..._all_thresholded.by_genes.gz` | TCGA-LUAD GISTIC2 copy number | UCSC Xena |
 | `${WORK_ROOT}/mc3.v0.2.8.PUBLIC.nonsilentGene.xena.gz` | TCGA MC3 non-silent mutation matrix | UCSC Xena, MC3 public release |
-| `${DATA_ROOT}/High-resolution/neutrophil_final.h5ad` | Salcher et al. 2022 NSCLC neutrophil reference | the atlas released with that paper |
-| `${PROJECT_ROOT}/data/reference/gavish2023_MPs.csv` | the 41 pan-cancer meta-programmes | supplementary table of Gavish et al. 2023 |
-| Hallmark `.gmt` | MSigDB Hallmark gene sets | MSigDB, after accepting its licence |
+| `${DATA_ROOT}/High-resolution/neutrophil_final.h5ad` | Salcher et al. 2022 NSCLC neutrophil reference | CELLxGENE <https://cellxgene.cziscience.com/collections/edb893ee-4066-4128-9aec-5eb2b03f8287> or Zenodo <https://doi.org/10.5281/zenodo.6411867>; rename/copy to `neutrophil_final.h5ad` |
+| `${DATA_ROOT}/GSE223503/41591_2025_3530_MOESM3_ESM.xlsx` | sample metadata for GSE223503, read by `data_prep/qc/qc_GSE223503.py` | supplementary file MOESM3 of the Nature Medicine article that released GSE223503; download from the publisher and place under `${DATA_ROOT}/GSE223503/` |
+| `${PROJECT_ROOT}/data/reference/collectri_symbols.tsv` | CollecTRI regulons behind the Fig. 3 TF-activity panel, read by `analysis/trajectory_tf/20a_tf_activity.py` | export from decoupleR/OmniPath: `decoupler.get_collectri(organism="human", split_complexes=False)` written to TSV |
+| `${PROJECT_ROOT}/data/reference/wilkerson_LAD_centroids.csv` | Wilkerson LAD expression-subtype centroids, read by `analysis/cnmf_meta_programs/08b_wilkerson_subtype.py` | supplementary material of Wilkerson et al., *Clin Cancer Res* 2012 (the 506-gene LAD predictor) |
+| `${PROJECT_ROOT}/data/reference/gavish2023_MPs.csv` | the 41 pan-cancer meta-programmes | supplementary tables of Gavish et al. 2023, Nature <https://doi.org/10.1038/s41586-023-06130-4>, also 3CA <https://www.weizmann.ac.il/sites/3CA>; export/rename to `gavish2023_MPs.csv` |
+| `${DATA_ROOT}/depmap/24Q2/` — `Model.csv`, `CRISPRGeneEffect.csv`, `OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv` | DepMap Public 24Q2 CRISPR gene effect, cell-line model table and expression | depmap.org data page, 24Q2 release; read by six scripts under `analysis/perturbation_cascade/` and `revision/` |
+| `${DATA_ROOT}/GSE207422/` — `GSE207422_NSCLC_bulk_RNAseq_log2TPM.txt.gz`, `..._metadata.xlsx` | neoadjuvant chemo-immunotherapy cohort | GEO GSE207422 supplementary files |
+| `${DATA_ROOT}/GSE126044/GSE126044_counts.txt.gz` | anti-PD-1 responder cohort, raw counts | GEO GSE126044 supplementary file |
+| `${DATA_ROOT}/GSE135222/GSE135222_GEO_RNA-seq_omicslab_exp.tsv.gz` | anti-PD-1 durable-benefit cohort | GEO GSE135222 supplementary file |
+| `${DATA_ROOT}/GSE68465/GSE68465_series_matrix.txt.gz` | Director's Challenge microarray validation cohort | GEO GSE68465 series matrix |
+| `${DATA_ROOT}/GSE31210/GSE31210_family.soft.gz` | Okayama microarray validation cohort | GEO GSE31210 SOFT family file |
+| `${PROJECT_ROOT}/data/gmt/MSigDB_Hallmark_2020.gmt` | Hallmark gene sets | Enrichr library `MSigDB_Hallmark_2020`, or MSigDB `h.all.*.symbols.gmt` renamed to that filename; no script downloads it |
 | Geneformer V2-104M weights | the foundation model | Hugging Face, `ctheodoris/Geneformer` at the commit pinned in `environments/*-pip-freeze.txt` |
 
 ## Derived tables deposited with the paper
@@ -27,7 +38,7 @@ them individually.
 The following are read by plotting or table-building scripts but have no
 producer in this repository. They were written during the analysis by code that
 is not part of the released set, so they are distributed as derived data in the
-Zenodo deposit that accompanies this repository (DOI in `CITATION.cff`).
+Zenodo deposit that accompanies this repository: https://doi.org/10.5281/zenodo.21912264
 Download the deposit and place them where the consuming script expects them.
 
 | File | Read by |
@@ -58,3 +69,27 @@ One naming mismatch is worth knowing about: the QC scripts write
 `<GSE>_clean.h5ad` from `${WORK_ROOT}/数据清洗/`. The cleaned files were copied
 and renamed into that directory by hand between the two stages. Either rename on
 copy, or adjust the paths at the top of the atlas_build scripts.
+
+## A third staging directory
+
+`data_prep/qc/dataset_inclusion_analysis.py` — the script README points to as the
+justification for excluding GSE149655, GSE223503 and GSE308103 — reads the QC
+outputs from a third location, `${DATA_ROOT}/cleaned/`, under the names listed at
+the top of that file (`<GSE>_clean.h5ad` or `<GSE>_LUAD_clean.h5ad`). Nothing in
+this repository writes that directory: copy the QC outputs there by hand. The
+script also rewrites two of those files in place.
+
+## The figure-data tree
+
+Analysis scripts write their plot inputs under `${PROJECT_ROOT}/results/`
+(`fig5_plot_data/`, `fig8_plot_data/v2_500/`, and so on). The plotting scripts and
+the supplementary-table builders read them from a second tree,
+`${WORK_ROOT}/luad_figures/<figure>/`, under different directory names — for
+example `results/fig5_plot_data/` versus `luad_figures/fig5/data/`. Nothing in
+this repository copies between the two: that step was done by hand.
+
+To run the plotting or table-building scripts, copy each producer's output into
+the matching `luad_figures/` directory first. `analysis/supplementary_tables/`
+uses `safe_read`, which prints `[SKIP] missing <path>` and omits the sheet rather
+than failing, so a workbook built without the copy step will be silently short of
+sheets — check the console output against the sheet list in the manuscript.

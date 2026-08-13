@@ -103,5 +103,5 @@ run_one () {
 wait $BIGPOOL $SMALLPOOL
 
 echo "All finished $(date +%H:%M:%S)"
-echo "Done $(ls"$SUM"/*_cells.csv 2>/dev/null | wc -l) / 89 个"
+echo "Done $(find "$SUM" -maxdepth 1 -type f -name "*_cells.csv" | wc -l) / 89 个"
 [ -f "$LOG/failed.log" ] && { echo "Failure log:"; cat "$LOG/failed.log"; }

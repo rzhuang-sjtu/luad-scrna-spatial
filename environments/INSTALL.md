@@ -25,7 +25,10 @@ Key Python packages: `scanpy`, `scvi-tools`, `anndata`, `squidpy`, `decoupler`,
 ```bash
 mamba env create -f geneformer.yml -n geneformer
 mamba activate geneformer
-pip install -r geneformer-pip-freeze.txt
+# Do not run: pip install -r geneformer-pip-freeze.txt
+# That file is a provenance snapshot and contains local conda-build paths.
+# geneformer.yml already pins Geneformer to Hugging Face commit ad8f66d,
+# which is the checkpoint the manuscript reports.
 ```
 
 This is intentionally separated from `scst` because Geneformer V2-104M pins

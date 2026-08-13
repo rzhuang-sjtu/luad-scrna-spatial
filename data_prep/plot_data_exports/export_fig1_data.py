@@ -23,7 +23,7 @@ IN_PATH = Path("${PROJECT_ROOT}/data/processed/luad_integrated.h5ad")
 OUT_DIR = Path("${WORK_ROOT}/luad_figures/fig1")
 
 # ── Fig 1B: dot plot markers ──
-# Aligned to HCC Fig.1B in the source paper; LUAD version
+# Panel layout aligned to Fig. 1B of the HCC study cited in the manuscript; LUAD version
 DOTPLOT_MARKERS = {
     "Epithelial":  ["EPCAM", "KRT18", "KRT19"],
     "Epithelial_prolif": ["TOP2A", "MKI67"],

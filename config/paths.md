@@ -45,10 +45,24 @@ substitute those as well:
 grep -rl 'Path.home()\|~/luad' --include='*.py' --include='*.R' --include='*.sh' .
 ```
 
-**`INFERCNV_ROOT`.** inferCNV was run on a rented compute node with its own
-scratch directory. `revision/copy_number_and_cnv/G2_run_infercnv.R` and
-`G3_launch_infercnv.sh` read `INFERCNV_ROOT`, falling back to
-`${WORK_ROOT}/infercnv`. Set it if your scratch space lives elsewhere.
+**`INFERCNV_ROOT`.** `revision/copy_number_and_cnv/G2_run_infercnv.R` and
+`G3_launch_infercnv.sh` read `INFERCNV_ROOT` and `WORK_ROOT` as *environment
+variables at run time*. They are not `${...}` placeholders, so `set_paths.py`
+does not touch them, and if neither variable is exported the scripts fall back to
+`./infercnv` in the current directory — which is not where the upstream step
+writes. `G1_prepare_infercnv.py` writes to `${PROJECT_ROOT}/results/infercnv/input`,
+so before running G2 or G3, export the matching directory. `G3_launch_infercnv.sh`
+also dispatches the R script *from* that directory (line 80,
+`"$RSCRIPT" "$ROOT/G2_run_infercnv.R"`), so copy it there as well — otherwise
+every per-patient job dies with "cannot open file" while the launcher still
+prints "All finished", because each job's output is redirected into
+`$LOG/<patient>.log`:
+
+```bash
+export INFERCNV_ROOT=<your project root>/results/infercnv
+mkdir -p "$INFERCNV_ROOT"
+cp revision/copy_number_and_cnv/G2_run_infercnv.R "$INFERCNV_ROOT"/
+```
 
 ## Directories created under these roots
 
@@ -78,3 +92,5 @@ workflow is publicly accessible; accessions are listed in the README and cited
 in the paper. Raw records for one spatial cohort (JGAS000613, JGAS000677) are
 controlled-access and are neither required by the released workflow nor
 redistributed here — see the README for what the workflow actually reads.
+
+**Required layout.** Place this repository at `~/luad` (that is, `$HOME/luad`). The 140 `~/luad` / `Path.home() / "luad"` occurrences listed above are *not* rewritten by `set_paths.py`; cloning anywhere else will break those 54 scripts. Either use that path, or run the grep above and substitute them yourself.
