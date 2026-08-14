@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the accompanying paper."
-title: "Analysis code for: Deep-learning integration of single-cell and spatial transcriptomics in lung adenocarcinoma"
+title: "Analysis code for: Deep-learning integration of single-cell and spatial transcriptomics reveals a neutrophil-associated mesenchymal niche and a candidate translocon dependency in lung adenocarcinoma"
 authors:
   - family-names: "Huang"
     given-names: "Ruizhe"
@@ -30,6 +30,7 @@ keywords:
   - spatial transcriptomics
   - in-silico perturbation
 license: MIT
+repository-code: "https://github.com/rzhuang-sjtu/luad-scrna-spatial"
 version: "1.0.1"
 date-released: "2026-08-13"
 doi: "10.5281/zenodo.21912264"
